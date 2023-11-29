@@ -30,7 +30,8 @@ class MessageDto : public oatpp::DTO {
   DTO_FIELD(String, version);
   DTO_FIELD(String, tag);
   DTO_FIELD(Int32, age);
-  DTO_FIELD(List<List<Int32>>, features);
+  DTO_FIELD(List<List<Int32>>, featureIds);
+  DTO_FIELD(List<List<Float32>>, featureValues);
   
 };
 
