@@ -82,6 +82,7 @@ public:
     ENDPOINT_ASYNC_INIT(EchoDtoBody)
     
     Action act() override {
+      // auto message = MessageDto::createShared();
       return request->readBodyToDtoAsync<oatpp::Object<MessageDto>>(controller->getDefaultObjectMapper()).callbackTo(&EchoDtoBody::returnResponse);
     }
     
