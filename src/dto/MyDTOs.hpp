@@ -36,6 +36,15 @@ class MessageDto : public oatpp::DTO {
   
 };
 
+class ResponseDto : public oatpp::DTO{
+
+  DTO_INIT(ResponseDto, DTO);
+
+  DTO_FIELD(String, name);
+  DTO_FIELD(Vector<Float32>, predicts);
+  
+};
+
 #include OATPP_CODEGEN_END(DTO)
 
 #endif /* MyDTOs_hpp */
