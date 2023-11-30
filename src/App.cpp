@@ -38,6 +38,9 @@ int main(int argc, const char * argv[]) {
 
   oatpp::base::Environment::init();
 
+  /* 后台运行服务 */
+  // std::thread serverThread(run);
+  // serverThread.detach();
   run();
   
   /* Print how much objects were created during app running, and what have left-probably leaked */

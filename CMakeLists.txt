@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-set(project_name example-async-api) ## rename your project here
+set(project_name async-api) ## rename your project here
 
 project(${project_name})
 
@@ -11,15 +11,18 @@ add_library(${project_name}-lib
         src/controller/MyController.cpp
         src/controller/MyController.hpp
         src/dto/MyDTOs.hpp
+        src/predictor/OnnxRuntimePredictor.hpp
 )
 
 ## link libs
 
 find_package(oatpp 1.3.0 REQUIRED)
+find_package(onnxruntime HINTS /usr/local/include/onnxruntime)
 
 target_link_libraries(${project_name}-lib
         PUBLIC oatpp::oatpp
         PUBLIC oatpp::oatpp-test
+        PUBLIC onnxruntime
 )
 
 target_include_directories(${project_name}-lib PUBLIC src)
@@ -29,13 +32,13 @@ target_include_directories(${project_name}-lib PUBLIC src)
 add_executable(${project_name}-exe
         src/App.cpp
 )
-target_link_libraries(${project_name}-exe ${project_name}-lib)
+target_link_libraries(${project_name}-exe ${project_name}-lib onnxruntime)
 add_dependencies(${project_name}-exe ${project_name}-lib)
 
 add_executable(${project_name}-test
         test/tests.cpp
 )
-target_link_libraries(${project_name}-test ${project_name}-lib)
+target_link_libraries(${project_name}-test ${project_name}-lib onnxruntime)
 add_dependencies(${project_name}-test ${project_name}-lib)
 
 set_target_properties(${project_name}-lib ${project_name}-exe ${project_name}-test PROPERTIES
