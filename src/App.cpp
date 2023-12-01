@@ -37,8 +37,6 @@ void run() {
 int main(int argc, const char * argv[]) {
   try{
     oatpp::base::Environment::init();
-    // std::thread serverThread(run);
-    // serverThread.join();
     run();
     /* Print how much objects were created during app running, and what have left-probably leaked */
     /* Disable object counting for release builds using '-D OATPP_DISABLE_ENV_OBJECT_COUNTERS' flag for better performance */
