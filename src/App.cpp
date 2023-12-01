@@ -35,21 +35,20 @@ void run() {
  *  main
  */
 int main(int argc, const char * argv[]) {
-
-  oatpp::base::Environment::init();
-
-  /* 后台运行服务 */
-  // std::thread serverThread(run);
-  // serverThread.detach();
-  run();
+  try{
+    oatpp::base::Environment::init();
+    // std::thread serverThread(run);
+    // serverThread.join();
+    run();
+    /* Print how much objects were created during app running, and what have left-probably leaked */
+    /* Disable object counting for release builds using '-D OATPP_DISABLE_ENV_OBJECT_COUNTERS' flag for better performance */
+    std::cout << "\nEnvironment:\n";
+    std::cout << "objectsCount = " << oatpp::base::Environment::getObjectsCount() << "\n";
+    std::cout << "objectsCreated = " << oatpp::base::Environment::getObjectsCreated() << "\n\n";
   
-  /* Print how much objects were created during app running, and what have left-probably leaked */
-  /* Disable object counting for release builds using '-D OATPP_DISABLE_ENV_OBJECT_COUNTERS' flag for better performance */
-  std::cout << "\nEnvironment:\n";
-  std::cout << "objectsCount = " << oatpp::base::Environment::getObjectsCount() << "\n";
-  std::cout << "objectsCreated = " << oatpp::base::Environment::getObjectsCreated() << "\n\n";
-  
-  oatpp::base::Environment::destroy();
-  
+    oatpp::base::Environment::destroy();
+  } catch (const std::runtime_error& e) {
+    std::cerr << "Runtime error: " << e.what() << std::endl;
+  }
   return 0;
 }

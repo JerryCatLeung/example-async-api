@@ -6,6 +6,14 @@ project(${project_name})
 
 set(CMAKE_CXX_STANDARD 11)
 
+# 在设置标志之前，添加一个条件判断，如果已经设置了该标志，则将其移除
+if(OATPP_COMPAT_BUILD_NO_THREAD_LOCAL)
+    message(STATUS "Removing OATPP_COMPAT_BUILD_NO_THREAD_LOCAL flag")
+    remove_definitions(-DOATPP_COMPAT_BUILD_NO_THREAD_LOCAL)
+endif()
+
+# add_definitions(-DOATPP_COMPAT_BUILD_NO_THREAD_LOCAL)
+
 add_library(${project_name}-lib
         src/AppComponent.hpp
         src/controller/MyController.cpp
