@@ -36,7 +36,7 @@ class ResponseDto : public oatpp::DTO{
   DTO_INIT(ResponseDto, DTO);
   
   DTO_FIELD(String, req_id);
-  DTO_FIELD(Vector<Float32>, predict);
+  DTO_FIELD(Vector<Float32>, predicts);
   
 };
 

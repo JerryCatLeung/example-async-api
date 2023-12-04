@@ -110,9 +110,9 @@ public:
       // In the function where you call the predictor
       std::vector<float> predictResult = m_predictor->predictor(featIdsTensorValuesStd, featValuesTensorValuesStd);
 
-      responseDto->predict = oatpp::Vector<Float32>::createShared();
+      responseDto->predicts = oatpp::Vector<Float32>::createShared();
       for(auto &val : predictResult) {
-        responseDto->predict->push_back(val);
+        responseDto->predicts->push_back(val);
       }
 
       return _return(controller->createDtoResponse(Status::CODE_200, responseDto));
