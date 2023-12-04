@@ -97,7 +97,7 @@ public:
     Action returnResponse(const oatpp::Object<MessageDto>& body){
       auto responseDto = ResponseDto::createShared();
       // std::cout << body->name->c_str() << std::endl;
-      responseDto->name = body->name;
+      responseDto->req_id = body->req_id;
       auto start1 = std::chrono::steady_clock::now();
       std::vector<int64_t> featIdsTensorValuesStd;
       for(auto it = body->featIdsTensor->begin(); it != body->featIdsTensor->end(); ++it) {

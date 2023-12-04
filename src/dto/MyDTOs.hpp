@@ -25,7 +25,7 @@ class MessageDto : public oatpp::DTO {
   
   DTO_INIT(MessageDto, DTO)
 
-  DTO_FIELD(String, name);
+  DTO_FIELD(String, req_id);
   DTO_FIELD(Vector<Int64>, featIdsTensor);
   DTO_FIELD(Vector<Float32>, featValsTensor);
   
@@ -35,7 +35,7 @@ class ResponseDto : public oatpp::DTO{
 
   DTO_INIT(ResponseDto, DTO);
   
-  DTO_FIELD(String, name);
+  DTO_FIELD(String, req_id);
   DTO_FIELD(Vector<Float32>, predict);
   
 };
