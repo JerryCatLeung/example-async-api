@@ -96,31 +96,19 @@ public:
     
     Action returnResponse(const oatpp::Object<MessageDto>& body){
       auto responseDto = ResponseDto::createShared();
-      // std::cout << body->name->c_str() << std::endl;
       responseDto->req_id = body->req_id;
-      auto start1 = std::chrono::steady_clock::now();
       std::vector<int64_t> featIdsTensorValuesStd;
       for(auto it = body->featIdsTensor->begin(); it != body->featIdsTensor->end(); ++it) {
         auto element = *it;
         featIdsTensorValuesStd.push_back(static_cast<int64_t>(element));
       }
-      auto end1 = std::chrono::steady_clock::now();
-      // std::cout << "the cost1 of time is " << std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1).count() << " um" << std::endl;
-      auto start2 = std::chrono::steady_clock::now();
       std::vector<float> featValuesTensorValuesStd;
       for(auto it = body->featValsTensor->begin(); it != body->featValsTensor->end(); ++it) {
         auto element = *it;
         featValuesTensorValuesStd.push_back(static_cast<float>(element));
       }
-      auto end2 = std::chrono::steady_clock::now();
-      // std::cout << "the cost2 of time is " << std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2).count() << " um" << std::endl;
-      
       // In the function where you call the predictor
-      //记录程序运行时间
-      auto start = std::chrono::steady_clock::now();
       std::vector<float> predictResult = m_predictor->predictor(featIdsTensorValuesStd, featValuesTensorValuesStd);
-      auto end = std::chrono::steady_clock::now();
-      // std::cout << "the cost3 of time is " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << " um" << std::endl;
 
       responseDto->predict = oatpp::Vector<Float32>::createShared();
       for(auto &val : predictResult) {
