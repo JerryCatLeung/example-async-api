@@ -91,11 +91,6 @@ public:
     ENDPOINT_ASYNC_INIT(EchoDtoBody)
     
     Action act() override {
-      // auto start0 = std::chrono::steady_clock::now();
-      // auto tmp = request->readBodyToDtoAsync<oatpp::Object<MessageDto>>(controller->getDefaultObjectMapper()).callbackTo(&EchoDtoBody::returnResponse);
-      // auto end0 = std::chrono::steady_clock::now();
-      // std::cout << "the cost0 of time is " << std::chrono::duration_cast<std::chrono::microseconds>(end0 - start0).count() << " um" << std::endl;
-      
       return request->readBodyToDtoAsync<oatpp::Object<MessageDto>>(controller->getDefaultObjectMapper()).callbackTo(&EchoDtoBody::returnResponse);;
     }
     
