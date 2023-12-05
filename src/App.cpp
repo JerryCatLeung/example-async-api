@@ -1,9 +1,8 @@
 
 #include "./controller/MyController.hpp"
 #include "./AppComponent.hpp"
-
+// #include <gperftools/profiler.h>
 #include "oatpp/network/Server.hpp"
-
 #include <iostream>
 
 /**
@@ -18,9 +17,7 @@ void run() {
   
   /* create ApiControllers and add endpoints to router */
   auto router = components.httpRouter.getObject();
-
   router->addController(MyController::createShared());
-
   /* create server */
   oatpp::network::Server server(components.serverConnectionProvider.getObject(),
                                 components.serverConnectionHandler.getObject());
@@ -37,7 +34,9 @@ void run() {
 int main(int argc, const char * argv[]) {
   try{
     oatpp::base::Environment::init();
+    // ProfilerStart("async-api-perf.prof");
     run();
+    // ProfilerStop();
     /* Print how much objects were created during app running, and what have left-probably leaked */
     /* Disable object counting for release builds using '-D OATPP_DISABLE_ENV_OBJECT_COUNTERS' flag for better performance */
     std::cout << "\nEnvironment:\n";

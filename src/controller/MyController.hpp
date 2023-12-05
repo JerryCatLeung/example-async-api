@@ -16,9 +16,8 @@
 #include OATPP_CODEGEN_BEGIN(ApiController) //<-- Begin codegen
 
 /**
- *  EXAMPLE ApiController
- *  Basic examples of howto create ENDPOINTs
- *  More details on oatpp.io
+ *  ApiController
+ *  Creating ENDPOINTs
  */
 class MyController : public oatpp::web::server::api::ApiController {
 private:
