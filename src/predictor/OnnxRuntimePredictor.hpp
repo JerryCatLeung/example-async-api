@@ -9,15 +9,15 @@ private:
   Ort::Session session;
   std::vector<const char*> input_node_names = {"feat_ids", "feat_vals"};
   std::vector<const char*> output_node_names = {"prob"};
-  std::vector<int64_t> input_node_dims = {35, 39};
-  size_t input_tensor_size = 35 * 39;
+  std::vector<int64_t> input_node_dims = {15, 39};
+  size_t input_tensor_size = 15 * 39;
 
 public:
   OnnxRuntimePredictor(const char* modelPath)
     : env(ORT_LOGGING_LEVEL_WARNING, "Model"),
       session(env, modelPath, session_options) {
         // 初始化session_options
-        session_options.SetIntraOpNumThreads(8);
+        session_options.SetIntraOpNumThreads(10);
         session_options.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_EXTENDED);
       }
   
